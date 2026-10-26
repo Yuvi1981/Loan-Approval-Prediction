@@ -1,0 +1,158 @@
+{
+  "drift_summary": {
+    "monitored_samples": 123,
+    "features_evaluated": 14,
+    "features_with_drift": 9,
+    "max_psi": 1.0939,
+    "top_drifted_feature": "EMI"
+  },
+  "performance_impact": {
+    "baseline": {
+      "accuracy": 0.8618,
+      "precision": 0.8469,
+      "recall": 0.9765,
+      "f1": 0.9071,
+      "roc_auc": 0.8437
+    },
+    "drifted": {
+      "accuracy": 0.6341,
+      "precision": 0.8571,
+      "recall": 0.5647,
+      "f1": 0.6809,
+      "roc_auc": 0.7153
+    },
+    "deltas": {
+      "accuracy_drop": -0.2277,
+      "f1_drop": -0.2262,
+      "roc_auc_drop": -0.1284
+    }
+  },
+  "feature_drift_details": [
+    {
+      "feature": "EMI",
+      "type": "Numeric",
+      "psi": 1.0939,
+      "psi_status": "Significant Drift",
+      "ks_statistic": 0.3324,
+      "ks_p_value": 0.0,
+      "drift_detected": true
+    },
+    {
+      "feature": "Credit_History",
+      "type": "Categorical",
+      "psi": 0.7825,
+      "psi_status": "Significant Drift",
+      "ks_statistic": NaN,
+      "ks_p_value": NaN,
+      "drift_detected": true
+    },
+    {
+      "feature": "ApplicantIncome",
+      "type": "Numeric",
+      "psi": 0.6006,
+      "psi_status": "Significant Drift",
+      "ks_statistic": 0.3282,
+      "ks_p_value": 0.0,
+      "drift_detected": true
+    },
+    {
+      "feature": "LoanAmount",
+      "type": "Numeric",
+      "psi": 0.5857,
+      "psi_status": "Significant Drift",
+      "ks_statistic": 0.3727,
+      "ks_p_value": 0.0,
+      "drift_detected": true
+    },
+    {
+      "feature": "Balance_Income",
+      "type": "Numeric",
+      "psi": 0.5673,
+      "psi_status": "Significant Drift",
+      "ks_statistic": 0.3318,
+      "ks_p_value": 0.0,
+      "drift_detected": true
+    },
+    {
+      "feature": "Total_Income",
+      "type": "Numeric",
+      "psi": 0.5469,
+      "psi_status": "Significant Drift",
+      "ks_statistic": 0.3324,
+      "ks_p_value": 0.0,
+      "drift_detected": true
+    },
+    {
+      "feature": "Log_Total_Income",
+      "type": "Numeric",
+      "psi": 0.5469,
+      "psi_status": "Significant Drift",
+      "ks_statistic": 0.3324,
+      "ks_p_value": 0.0,
+      "drift_detected": true
+    },
+    {
+      "feature": "Property_Area",
+      "type": "Categorical",
+      "psi": 0.3723,
+      "psi_status": "Significant Drift",
+      "ks_statistic": NaN,
+      "ks_p_value": NaN,
+      "drift_detected": true
+    },
+    {
+      "feature": "Loan_to_Income",
+      "type": "Numeric",
+      "psi": 0.1749,
+      "psi_status": "Moderate Drift",
+      "ks_statistic": 0.0938,
+      "ks_p_value": 0.3401,
+      "drift_detected": true
+    },
+    {
+      "feature": "CoapplicantIncome",
+      "type": "Numeric",
+      "psi": 0.0444,
+      "psi_status": "Stable",
+      "ks_statistic": 0.0925,
+      "ks_p_value": 0.3437,
+      "drift_detected": false
+    },
+    {
+      "feature": "Dependents",
+      "type": "Categorical",
+      "psi": 0.0137,
+      "psi_status": "Stable",
+      "ks_statistic": NaN,
+      "ks_p_value": NaN,
+      "drift_detected": false
+    },
+    {
+      "feature": "Education",
+      "type": "Categorical",
+      "psi": 0.0093,
+      "psi_status": "Stable",
+      "ks_statistic": NaN,
+      "ks_p_value": NaN,
+      "drift_detected": false
+    },
+    {
+      "feature": "Loan_Amount_Term",
+      "type": "Numeric",
+      "psi": 0.0009,
+      "psi_status": "Stable",
+      "ks_statistic": 0.0114,
+      "ks_p_value": 1.0,
+      "drift_detected": false
+    },
+    {
+      "feature": "Self_Employed",
+      "type": "Categorical",
+      "psi": 0.0004,
+      "psi_status": "Stable",
+      "ks_statistic": NaN,
+      "ks_p_value": NaN,
+      "drift_detected": false
+    }
+  ]
+}

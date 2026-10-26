@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "test_sample_count": 123,
+    "decision_threshold": 0.5,
+    "fairness_gap_threshold": 0.1
+  },
+  "attributes": {
+    "Gender": {
+      "demographic_parity_difference": 0.36,
+      "equal_opportunity_difference": 0.0714,
+      "dp_gap_exceeded": true,
+      "eo_gap_exceeded": false,
+      "subgroups": {
+        "Female": {
+          "selection_rate": 0.64,
+          "accuracy": 0.84,
+          "precision": 0.8125,
+          "recall": 0.9286,
+          "sample_count": 25
+        },
+        "Male": {
+          "selection_rate": 0.8333,
+          "accuracy": 0.875,
+          "precision": 0.8625,
+          "recall": 0.9857,
+          "sample_count": 96
+        },
+        "Unknown": {
+          "selection_rate": 1.0,
+          "accuracy": 0.5,
+          "precision": 0.5,
+          "recall": 1.0,
+          "sample_count": 2
+        }
+      }
+    },
+    "Married": {
+      "demographic_parity_difference": 0.2143,
+      "equal_opportunity_difference": 0.0233,
+      "dp_gap_exceeded": true,
+      "eo_gap_exceeded": false,
+      "subgroups": {
+        "No": {
+          "selection_rate": 0.6591,
+          "accuracy": 0.8636,
+          "precision": 0.8276,
+          "recall": 0.96,
+          "sample_count": 44
+        },
+        "Yes": {
+          "selection_rate": 0.8734,
+          "accuracy": 0.8608,
+          "precision": 0.8551,
+          "recall": 0.9833,
+          "sample_count": 79
+        }
+      }
+    },
+    "Property_Area": {
+      "demographic_parity_difference": 0.0485,
+      "equal_opportunity_difference": 0.0455,
+      "dp_gap_exceeded": false,
+      "eo_gap_exceeded": false,
+      "subgroups": {
+        "Rural": {
+          "selection_rate": 0.8235,
+          "accuracy": 0.7647,
+          "precision": 0.75,
+          "recall": 0.9545,
+          "sample_count": 34
+        },
+        "Semiurban": {
+          "selection_rate": 0.7959,
+          "accuracy": 0.898,
+          "precision": 0.8974,
+          "recall": 0.9722,
+          "sample_count": 49
+        },
+        "Urban": {
+          "selection_rate": 0.775,
+          "accuracy": 0.9,
+          "precision": 0.871,
+          "recall": 1.0,
+          "sample_count": 40
+        }
+      }
+    }
+  },
+  "overall_summary": {
+    "any_gap_flagged": true,
+    "flagged_attributes": [
+      "Gender",
+      "Married"
+    ]
+  }
+}

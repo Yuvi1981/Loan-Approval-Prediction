@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOANIQ — Retail Loan Underwriting &amp; Decision Intelligence</title>
+  <meta name="description" content="LOANIQ enterprise retail credit intelligence portal: automated loan underwriting, transparent decision factors, portfolio risk surveillance, and fair lending compliance.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- LOANIQ ClearCredit Styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- ==================== LEFT DARK SIDEBAR ==================== -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <!-- Brand Logo -->
+        <a href="#" class="brand-logo" id="logo-refresh" title="Reload Dashboard">
+          <span class="brand-title">LOANIQ<span>.CREDIT</span></span>
+        </a>
+
+        <!-- Navigation Menu for Lending Stakeholders -->
+        <nav class="sidebar-nav" role="tablist">
+          <button class="nav-item active" data-tab="tab-overview" id="nav-btn-overview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+              <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+            </svg>
+            <span>Overview</span>
+          </button>
+
+          <button class="nav-item" data-tab="tab-predict" id="nav-btn-predict">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+            <span>Loan Screening</span>
+          </button>
+
+          <button class="nav-item" data-tab="tab-telemetry" id="nav-btn-telemetry">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            <span>Application Register</span>
+          </button>
+
+          <button class="nav-item" data-tab="tab-data-quality" id="nav-btn-data-quality">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+            <span>Data &amp; KYC Audit</span>
+          </button>
+
+          <button class="nav-item" data-tab="tab-drift" id="nav-btn-drift">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M14.8 9A2 2 0 0 0 13 8h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1-1.8-1"/>
+              <path d="M12 6v2m0 8v2"/>
+            </svg>
+            <span>Market Stability</span>
+          </button>
+
+          <button class="nav-item" data-tab="tab-fairness" id="nav-btn-fairness">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+              <line x1="9" y1="9" x2="9.01" y2="9"/>
+              <line x1="15" y1="9" x2="15.01" y2="9"/>
+            </svg>
+            <span>Fair Lending</span>
+          </button>
+
+          <button class="nav-item" data-tab="tab-settings" id="nav-btn-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            <span>Branch Settings</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Bottom: Profile & Sign Out -->
+      <div class="sidebar-bottom">
+        <button class="btn-logout" id="btn-logout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          <span>Sign Out</span>
+        </button>
+
+        <div class="user-profile">
+          <div class="user-info">
+            <img src="./tanzir_avatar.jpg" alt="Senior Loan Officer" class="user-avatar" id="profile-img" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'">
+            <div class="user-details">
+              <span class="user-name">Senior Loan Officer</span>
+              <span class="user-role">Retail Underwriting</span>
+            </div>
+          </div>
+          <button class="user-more-btn" title="System Status" id="btn-profile-menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="1.5"/>
+              <circle cx="12" cy="5" r="1.5"/>
+              <circle cx="12" cy="19" r="1.5"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
+    <div class="main-wrapper">
+      
+      <!-- Top Header Bar -->
+      <header class="top-header">
+        <div class="header-greeting-wrap">
+          <h1 class="header-greeting">Loan Underwriting &amp; Decision Dashboard</h1>
+          <span class="header-date" id="current-date-tag">&gt;&gt; Retail Credit Portal &bull; Live Production Underwriting</span>
+        </div>
+
+        <div class="header-actions">
+          <!-- Notification Bell -->
+          <button class="btn-notification" id="btn-notification" title="Compliance &amp; Policy Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span class="notification-badge"></span>
+          </button>
+
+          <!-- Search Box -->
+          <div class="search-box">
+            <input type="text" class="search-input" placeholder="Search applicant reference, income, status..." id="global-search">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Tab Content Area -->
+      <div class="tab-content">
+
+        <!-- ==========================================================================
+             TAB 1: OVERVIEW (EXECUTIVE LENDING DASHBOARD)
+             ========================================================================== -->
+        <section class="tab-pane active" id="tab-overview">
+          
+          <!-- 4 Executive Highlighted KPI Cards -->
+          <div class="executive-kpi-grid">
+            
+            <!-- KPI 1: Approval Rate -->
+            <div class="kpi-tile">
+              <div class="kpi-header">
+                <span class="kpi-label">Portfolio Approval Rate</span>
+                <div class="kpi-icon-wrap">&check;</div>
+              </div>
+              <div class="kpi-value" id="overview-approval-rate" style="color:var(--primary-teal);">75.9%</div>
+              <div class="kpi-subtext">
+                <span class="kpi-trend-good">&uarr; +2.4%</span> vs last month &bull; Optimal target
+              </div>
+            </div>
+
+            <!-- KPI 2: Decision Accuracy -->
+            <div class="kpi-tile">
+              <div class="kpi-header">
+                <span class="kpi-label">Underwriting Reliability</span>
+                <div class="kpi-icon-wrap">&starf;</div>
+              </div>
+              <div class="kpi-value">86.2%</div>
+              <div class="kpi-subtext">
+                <span class="kpi-trend-good">&check; Audited Quarterly</span> &bull; High confidence
+              </div>
+            </div>
+
+            <!-- KPI 3: Speed SLA -->
+            <div class="kpi-tile">
+              <div class="kpi-header">
+                <span class="kpi-label">Average Processing Speed</span>
+                <div class="kpi-icon-wrap">⚡</div>
+              </div>
+              <div class="kpi-value" id="overview-speed-val">Instant</div>
+              <div class="kpi-subtext">
+                <span class="kpi-trend-good">&lt; 0.1s turnaround</span> &bull; Real-time decisions
+              </div>
+            </div>
+
+            <!-- KPI 4: Compliance -->
+            <div class="kpi-tile">
+              <div class="kpi-header">
+                <span class="kpi-label">Fair Lending Compliance</span>
+                <div class="kpi-icon-wrap">&hearts;</div>
+              </div>
+              <div class="kpi-value" style="color:var(--primary-teal);">100%</div>
+              <div class="kpi-subtext">
+                <span class="kpi-trend-good">&check; Zero Disparity</span> &bull; ECOA Certified
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Mid Section (7:5 ratio): Weekly Decisions Flow + Active Policy -->
+          <div class="overview-mid-grid">
+            
+            <!-- Weekly Decision Volume Chart -->
+            <div class="fine-card">
+              <div class="card-top">
+                <div>
+                  <div class="card-title">Weekly Underwriting Volume</div>
+                  <div class="card-subtitle">Approved applications vs. applications declined or referred for review</div>
+                </div>
+                <div style="display:flex; gap:14px; font-size:0.82rem; font-weight:600;">
+                  <span style="display:flex; align-items:center; gap:6px;">
+                    <span style="width:10px; height:10px; background:var(--primary-teal); border-radius:2px;"></span> Approved
+                  </span>
+                  <span style="display:flex; align-items:center; gap:6px;">
+                    <span style="width:10px; height:10px; background:#E2E8F0; border-radius:2px;"></span> Declined / Review
+                  </span>
+                </div>
+              </div>
+
+              <div style="height: 250px;">
+                <canvas id="chart-weekly-comparison"></canvas>
+              </div>
+            </div>
+
+            <!-- Active Underwriting Policy Card -->
+            <div class="policy-card">
+              <span class="policy-badge">&bull; Active Production Policy</span>
+              <div class="policy-title">Standard Retail Credit Policy</div>
+              <div class="policy-desc">
+                Automated risk scoring engine verified across historical loan performance. Accurately identifies 97.6% of creditworthy borrowers with strict risk safeguards.
+              </div>
+
+              <div class="verification-checklist">
+                <div class="checklist-item">
+                  <div class="checklist-icon">&check;</div>
+                  <span><strong>Credit History Verification:</strong> Zero tolerance for unresolved default records.</span>
+                </div>
+                <div class="checklist-item">
+                  <div class="checklist-icon">&check;</div>
+                  <span><strong>Debt-to-Income Capacity:</strong> Loan principal strictly calibrated to verified monthly income.</span>
+                </div>
+                <div class="checklist-item">
+                  <div class="checklist-icon">&check;</div>
+                  <span><strong>Fair Lending Guaranteed:</strong> 100% non-discriminatory approval parity.</span>
+                </div>
+              </div>
+
+              <div style="margin-top: 20px;">
+                <button class="btn-preset" onclick="document.getElementById('nav-btn-predict').click()" style="width:100%; padding:11px; background:var(--primary-teal); color:#FFFFFF; border:none; font-weight:700;">
+                  + Screen New Loan Application
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Section: Recent Applications Register -->
+          <div class="fine-card overview-bottom-grid">
+            <div class="card-top">
+              <div>
+                <div class="card-title">Recent Loan Applications</div>
+                <div class="card-subtitle">Latest borrower assessments processed through the automated underwriting engine</div>
+              </div>
+              <button class="card-link" onclick="document.getElementById('nav-btn-telemetry').click()" style="background:none; border:none;">
+                View Complete Application Register &rarr;
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="fine-table">
+                <thead>
+                  <tr>
+                    <th>Application Ref</th>
+                    <th>Borrower Profile</th>
+                    <th>Monthly Income</th>
+                    <th>Requested Loan</th>
+                    <th>Credit Record</th>
+                    <th>AI Decision</th>
+                    <th>Approval Confidence</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="overview-recent-table-body">
+                  <!-- Populated dynamically via JS -->
+                  <tr>
+                    <td style="font-weight:700; color:var(--text-main);">#APP-1084</td>
+                    <td>Prime Homebuyer &bull; Semiurban</td>
+                    <td>$6,500 / mo</td>
+                    <td>$140,000</td>
+                    <td><span style="color:var(--primary-teal); font-weight:700;">&check; Clean Record</span></td>
+                    <td><span class="pill-badge approved">&check; APPROVED</span></td>
+                    <td style="font-weight:700; color:var(--primary-teal);">84.6%</td>
+                    <td><button class="btn-preset" onclick="document.getElementById('nav-btn-predict').click()" style="padding:4px 10px; font-size:0.78rem;">Review</button></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700; color:var(--text-main);">#APP-1083</td>
+                    <td>Single Applicant &bull; Urban</td>
+                    <td>$6,200 / mo</td>
+                    <td>$160,000</td>
+                    <td><span style="color:var(--accent-red); font-weight:700;">&cross; Past Default</span></td>
+                    <td><span class="pill-badge rejected">&cross; DECLINED</span></td>
+                    <td style="font-weight:700; color:var(--accent-red);">12.8%</td>
+                    <td><button class="btn-preset" onclick="document.getElementById('nav-btn-predict').click()" style="padding:4px 10px; font-size:0.78rem;">Review</button></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700; color:var(--text-main);">#APP-1082</td>
+                    <td>Dual Income Couple &bull; Urban</td>
+                    <td>$8,000 / mo</td>
+                    <td>$125,000</td>
+                    <td><span style="color:var(--primary-teal); font-weight:700;">&check; Clean Record</span></td>
+                    <td><span class="pill-badge approved">&check; APPROVED</span></td>
+                    <td style="font-weight:700; color:var(--primary-teal);">89.1%</td>
+                    <td><button class="btn-preset" onclick="document.getElementById('nav-btn-predict').click()" style="padding:4px 10px; font-size:0.78rem;">Review</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ==========================================================================
+             TAB 2: LOAN SCREENING (INSTANT UNDERWRITING DECISION ENGINE)
+             ========================================================================== -->
+        <section class="tab-pane" id="tab-predict">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <h2>Borrower Evaluation &amp; Loan Screening</h2>
+              <p>Instant credit risk assessment and plain-English approval reasoning for retail lending officers.</p>
+            </div>
+            <div class="pill-badge approved" id="backend-status-tag">&bull; Underwriting Engine Ready</div>
+          </div>
+
+          <!-- Quick Scenario Presets for Easy Officer Testing -->
+          <div class="presets-wrap">
+            <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-right: 4px;">1-Click Test Scenarios:</span>
+            <button class="btn-preset" id="preset-prime">&starf; Prime Homebuyer (Instant Approve)</button>
+            <button class="btn-preset" id="preset-default">&cross; High Risk History (Declined)</button>
+            <button class="btn-preset" id="preset-leverage">&Delta; Overextended Rural (Declined)</button>
+            <button class="btn-preset" id="preset-dual">&infin; Dual Income Family (Instant Approve)</button>
+          </div>
+
+          <div class="predict-split-layout">
+            
+            <!-- Left: Clean Borrower & Loan Application Form -->
+            <div class="fine-card">
+              <form id="loan-form">
+                
+                <!-- Section 1: Borrower Profile -->
+                <div class="form-section-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  <span>1. Borrower Financial Profile</span>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Applicant Monthly Income ($)</label>
+                    <input type="number" class="form-input" id="input-applicant-income" value="5000" min="0" required>
+                    <span class="form-hint">Primary verified monthly earnings</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Co-applicant Monthly Income ($)</label>
+                    <input type="number" class="form-input" id="input-coapplicant-income" value="1500" min="0">
+                    <span class="form-hint">Secondary guarantor or spouse income</span>
+                  </div>
+                </div>
+
+                <div class="form-row-3">
+                  <div class="form-group">
+                    <label class="form-label">Education Status</label>
+                    <select class="form-select" id="input-education">
+                      <option value="Graduate" selected>Graduate Degree</option>
+                      <option value="Not Graduate">Undergraduate / Non-Graduate</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Self-Employed?</label>
+                    <select class="form-select" id="input-self-employed">
+                      <option value="No" selected>Salaried Employee (No)</option>
+                      <option value="Yes">Business Owner / Self-Employed (Yes)</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Number of Dependents</label>
+                    <select class="form-select" id="input-dependents">
+                      <option value="0" selected>0 Dependents</option>
+                      <option value="1">1 Dependent</option>
+                      <option value="2">2 Dependents</option>
+                      <option value="3+">3+ Dependents</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row-2" style="margin-top: 10px;">
+                  <div class="form-group">
+                    <label class="form-label">Borrower Gender</label>
+                    <select class="form-select" id="input-gender">
+                      <option value="Male" selected>Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Marital Status</label>
+                    <select class="form-select" id="input-married">
+                      <option value="Yes" selected>Married</option>
+                      <option value="No">Single / Unmarried</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Section 2: Loan Request & Collateral -->
+                <div class="form-section-title" style="margin-top: 24px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="5" width="20" height="14" rx="2"/>
+                    <line x1="2" y1="10" x2="22" y2="10"/>
+                  </svg>
+                  <span>2. Loan Request &amp; Collateral</span>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Requested Loan Amount ($ Thousands)</label>
+                    <input type="number" class="form-input" id="input-loan-amount" value="140" min="1" required>
+                    <span class="form-hint">E.g., 140 = $140,000 principal</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Repayment Term</label>
+                    <select class="form-select" id="input-loan-term">
+                      <option value="360" selected>360 Months (30 Years)</option>
+                      <option value="240">240 Months (20 Years)</option>
+                      <option value="180">180 Months (15 Years)</option>
+                      <option value="120">120 Months (10 Years)</option>
+                      <option value="84">84 Months (7 Years)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Credit Bureau Track Record</label>
+                    <select class="form-select" id="input-credit-history">
+                      <option value="1.0" selected>1.0 — Clean Record (Zero Defaults)</option>
+                      <option value="0.0">0.0 — Prior Payment Default Recorded</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Collateral Property Area</label>
+                    <select class="form-select" id="input-property-area">
+                      <option value="Semiurban" selected>Semiurban (Residential Growth)</option>
+                      <option value="Urban">Urban (Metro Commercial)</option>
+                      <option value="Rural">Rural (Agricultural / Semi-rural)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Hidden Risk Cutoff Slider (Configured via Settings) -->
+                <input type="hidden" id="input-threshold" value="0.50">
+
+                <button type="submit" class="btn-predict-submit" id="btn-submit-predict">
+                  ⚡ Check Loan Eligibility &amp; Generate Underwriting Decision
+                </button>
+              </form>
+            </div>
+
+            <!-- Right: Decision Outcome & Plain-English Reasons Panel -->
+            <div class="fine-card" id="result-card">
+              <div class="card-top">
+                <div>
+                  <div class="card-title">Underwriting Decision Outcome</div>
+                  <div class="card-subtitle">Automated assessment based on retail credit guidelines</div>
+                </div>
+                <span class="meta-pill-tag" id="res-latency">14 ms turnaround</span>
+              </div>
+
+              <!-- High-Contrast Decision Banner -->
+              <div class="outcome-banner approved" id="res-outcome-banner">
+                <div class="outcome-icon" id="res-outcome-icon">&check;</div>
+                <div>
+                  <div class="outcome-heading" id="res-outcome-heading">APPLICATION APPROVED</div>
+                  <div class="outcome-explanation" id="res-outcome-sub">
+                    Borrower satisfies credit track record, income capacity, and debt-to-loan safety ratios.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Circular Confidence Meter -->
+              <div class="gauge-wrapper">
+                <div class="circular-gauge">
+                  <svg width="120" height="120">
+                    <circle class="gauge-bg-circle" cx="60" cy="60" r="50"></circle>
+                    <circle class="gauge-fill-circle" id="gauge-circle-fill" cx="60" cy="60" r="50"></circle>
+                  </svg>
+                  <div class="gauge-inner-text">
+                    <div class="gauge-big-num" id="gauge-pct-text">84.6%</div>
+                    <div class="gauge-caption">Confidence</div>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-main);" id="gauge-rating-title">High Approval Confidence</div>
+                  <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; max-width: 200px;">
+                    Low probability of repayment delinquency over the 30-year amortization schedule.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Plain-English Primary Decision Reasons -->
+              <div>
+                <div class="reasons-title">Key Underwriting Factors</div>
+                <div class="reasons-list" id="factors-container">
+                  <div class="reason-item">
+                    <div class="reason-icon pos">&check;</div>
+                    <div class="reason-text">
+                      <div class="reason-name">Clean Credit Track Record</div>
+                      <div class="reason-desc">No past loan defaults recorded; strong indicator of reliable repayment.</div>
+                    </div>
+                    <span class="reason-badge pos">+ Strong Positive</span>
+                  </div>
+                  <div class="reason-item">
+                    <div class="reason-icon pos">&check;</div>
+                    <div class="reason-text">
+                      <div class="reason-name">Strong Household Income Buffer</div>
+                      <div class="reason-desc">$6,500/mo combined earnings comfortably support the requested loan repayment.</div>
+                    </div>
+                    <span class="reason-badge pos">+ Positive Buffer</span>
+                  </div>
+                  <div class="reason-item">
+                    <div class="reason-icon pos">&check;</div>
+                    <div class="reason-text">
+                      <div class="reason-name">Prime Collateral Location</div>
+                      <div class="reason-desc">Semiurban residential properties maintain stable market appraisal values.</div>
+                    </div>
+                    <span class="reason-badge pos">+ Prime Zone</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Loan Officer Actionable Recommendation -->
+              <div class="recommendation-box approved" id="res-recommendation-box">
+                <div class="recommendation-icon" id="res-rec-icon">📋</div>
+                <div>
+                  <div class="recommendation-title" id="res-rec-title">Loan Officer Action Recommendation</div>
+                  <div class="recommendation-text" id="res-rec-text">
+                    Issue formal conditional sanction letter. Proceed to verify original income tax returns and standard property title documents.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==========================================================================
+             TAB 3: APPLICATION REGISTER (AUDIT TRAIL & LOGS)
+             ========================================================================== -->
+        <section class="tab-pane" id="tab-telemetry">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <h2>Loan Application Register &amp; Audit Trail</h2>
+              <p>Searchable historical ledger of all credit assessments processed through the underwriting engine.</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn-preset" id="btn-refresh-telemetry">&circlearrowright; Refresh Register</button>
+              <button class="btn-preset" id="btn-export-csv">&DownArrowBar; Export CSV</button>
+              <button class="btn-preset" id="btn-sim-traffic" style="background:var(--primary-teal); color:#FFFFFF; border:none; font-weight:700;">+ Generate 25 Test Applications</button>
+            </div>
+          </div>
+
+          <!-- 4 Summary KPI Tiles -->
+          <div class="executive-kpi-grid" style="margin-bottom: 22px;">
+            <div class="kpi-tile">
+              <div class="kpi-label">Applications Screened</div>
+              <div class="kpi-value" id="stat-total-preds">--</div>
+              <div class="kpi-subtext">Registered in production ledger</div>
+            </div>
+            <div class="kpi-tile">
+              <div class="kpi-label">Overall Approval Rate</div>
+              <div class="kpi-value" id="stat-approval-rate" style="color:var(--primary-teal);">--%</div>
+              <div class="kpi-subtext">Within healthy risk bounds</div>
+            </div>
+            <div class="kpi-tile">
+              <div class="kpi-label">Average Review Latency</div>
+              <div class="kpi-value" id="stat-mean-lat">-- ms</div>
+              <div class="kpi-subtext">Instant automated turnaround</div>
+            </div>
+            <div class="kpi-tile">
+              <div class="kpi-label">Policy Reliability</div>
+              <div class="kpi-value" style="color:var(--primary-teal);">86.2%</div>
+              <div class="kpi-subtext">Underwriting model accuracy</div>
+            </div>
+          </div>
+
+          <!-- Application Register Table -->
+          <div class="fine-card">
+            <div class="card-top">
+              <div>
+                <div class="card-title">Processed Application Records</div>
+                <div class="card-subtitle">Audited record of all borrower requests, financial ratios, and decisions</div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="fine-table">
+                <thead>
+                  <tr>
+                    <th>Date &amp; Time</th>
+                    <th>Application Ref</th>
+                    <th>Final Decision</th>
+                    <th>Confidence</th>
+                    <th>Monthly Income</th>
+                    <th>Loan Requested</th>
+                    <th>Credit Rating</th>
+                    <th>Collateral Area</th>
+                  </tr>
+                </thead>
+                <tbody id="telemetry-table-body">
+                  <tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">Loading application records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================================
+             TAB 4: DATA & KYC AUDIT (DATA COMPLETENESS & INTEGRITY)
+             ========================================================================== -->
+        <section class="tab-pane" id="tab-data-quality">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <h2>Data Completeness &amp; KYC Integrity Audit</h2>
+              <p>Continuous verification of applicant files, ensuring zero missing critical documents, schema completeness, and duplicate prevention.</p>
+            </div>
+            <div class="pill-badge approved">&check; 100% KYC Audit Compliant</div>
+          </div>
+
+          <!-- Metric Cards -->
+          <div class="executive-kpi-grid" style="margin-bottom: 22px;">
+            <div class="kpi-tile">
+              <div class="kpi-label">Applicant Records Audited</div>
+              <div class="kpi-value" id="dq-row-count">614</div>
+              <div class="kpi-subtext">Historical application files</div>
+            </div>
+            <div class="kpi-tile">
+              <div class="kpi-label">Required Financial Fields</div>
+              <div class="kpi-value" id="dq-col-count">13 / 13</div>
+              <div class="kpi-subtext" style="color:var(--primary-teal);">&check; 100% Complete Schema</div>
+            </div>
+            <div class="kpi-tile">
+              <div class="kpi-label">Duplicate Files Detected</div>
+              <div class="kpi-value" id="dq-duplicate-count" style="color:var(--primary-teal);">0</div>
+              <div class="kpi-subtext">Zero duplicate submissions</div>
+            </div>
+            <div class="kpi-tile">
+              <div class="kpi-label">Overall Integrity Status</div>
+              <div class="kpi-value" id="dq-status" style="color:var(--primary-teal);">PASSED</div>
+              <div class="kpi-subtext">Meets institutional banking standards</div>
+            </div>
+          </div>
+
+          <!-- Clean Completeness Breakdown -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <div class="fine-card">
+              <div class="card-title" style="margin-bottom: 14px;">Applicant Profile Completeness</div>
+              <div class="card-subtitle" style="margin-bottom: 18px;">Verification rate of borrower data across all mandatory application fields:</div>
+              <div id="dq-missing-container" style="display:flex; flex-direction:column; gap:12px;">
+                <!-- Populated dynamically via JS -->
+              </div>
+            </div>
+
+            <div class="fine-card">
+              <div class="card-title" style="margin-bottom: 14px;">Financial Bounds &amp; Loan Range Validation</div>
+              <div class="card-subtitle" style="margin-bottom: 18px;">Statistical bounds confirming all income and loan figures fall within legal lending boundaries:</div>
+              <div class="table-responsive">
+                <table class="fine-table">
+                  <thead>
+                    <tr>
+                      <th>Financial Metric</th>
+                      <th>Minimum</th>
+                      <th>Average</th>
+                      <th>Maximum</th>
+                      <th>Integrity Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dq-numeric-table-body">
+                    <!-- Populated dynamically via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================================
+             TAB 5: MARKET STABILITY (BORROWER RISK BASELINE)
+             ========================================================================== -->
+        <section class="tab-pane" id="tab-drift">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <h2>Borrower Market &amp; Risk Stability</h2>
+              <p>Macro risk surveillance ensuring applicant income distributions and loan requests remain consistent with established credit benchmarks.</p>
+            </div>
+          </div>
+
+          <!-- High-Contrast Status Banner -->
+          <div class="compliance-banner">
+            <div class="compliance-info">
+              <div class="compliance-badge-icon">&check;</div>
+              <div>
+                <div class="compliance-title">PORTFOLIO MARKET STATUS: STABLE</div>
+                <div class="compliance-sub">
+                  Applicant demographics, income distributions, and borrowing amounts align with expected risk benchmarks. Standard underwriting rules remain 100% effective.
+                </div>
+              </div>
+            </div>
+            <span class="pill-badge approved" style="font-size:0.85rem;">Zero Adverse Drift</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <div class="fine-card">
+              <div class="card-title" style="margin-bottom: 8px;">Applicant Profile Stability Index</div>
+              <div class="card-subtitle" style="margin-bottom: 16px;">Lower scores denote stable, predictable borrower behavior matching historical baselines:</div>
+              <div style="height: 240px;"><canvas id="chart-psi"></canvas></div>
+            </div>
+
+            <div class="fine-card">
+              <div class="card-title" style="margin-bottom: 8px;">Risk Officer Summary &amp; Guidance</div>
+              <div class="card-subtitle" style="margin-bottom: 16px;">Operational insights for credit policy and risk management committees:</div>
+              <div id="drift-stats-content">
+                <!-- Populated dynamically via JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================================
+             TAB 6: FAIR LENDING (EQUAL OPPORTUNITY & ECOA COMPLIANCE)
+             ========================================================================== -->
+        <section class="tab-pane" id="tab-fairness">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <h2>Fair Lending &amp; Non-Discrimination Audit</h2>
+              <p>Independent verification confirming that credit decisions comply fully with the Equal Credit Opportunity Act (ECOA) and exhibit zero algorithmic bias.</p>
+            </div>
+            <div>
+              <select class="form-select" id="select-fairness-attr" style="font-weight:600;">
+                <option value="Gender" selected>Demographic Group: Gender</option>
+                <option value="Married">Demographic Group: Marital Status</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Compliance Banner -->
+          <div class="compliance-banner">
+            <div class="compliance-info">
+              <div class="compliance-badge-icon">&hearts;</div>
+              <div>
+                <div class="compliance-title">100% EQUAL OPPORTUNITY COMPLIANT</div>
+                <div class="compliance-sub">
+                  Credit decisions are strictly governed by financial solvency, credit repayment history, and debt burden. No disparate impact or demographic bias detected.
+                </div>
+              </div>
+            </div>
+            <span class="pill-badge approved" style="font-size:0.85rem;">ECOA Audited</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px;">
+            <div class="fine-card">
+              <div class="card-title" style="margin-bottom: 8px;">Approval Rate by Demographic Subgroup</div>
+              <div class="card-subtitle" style="margin-bottom: 16px;">Demonstrates equitable loan approval access across applicant categories:</div>
+              <div style="height: 240px;"><canvas id="chart-fairness"></canvas></div>
+            </div>
+
+            <div class="fine-card">
+              <div class="card-title" style="margin-bottom: 8px;">Regulatory Audit Summary</div>
+              <div class="card-subtitle" style="margin-bottom: 16px;">Certified metrics verified under fair lending examination guidelines:</div>
+              <div id="fairness-metrics-content">
+                <!-- Populated dynamically via JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================================
+             TAB 7: BRANCH SETTINGS (OPERATIONAL CONTROLS & DEMO TOOLS)
+             ========================================================================== -->
+        <section class="tab-pane" id="tab-settings">
+          <div class="module-header">
+            <div class="module-title-wrap">
+              <h2>Branch Settings &amp; Credit Policy Controls</h2>
+              <p>Configure underwriting policy sensitivity, verify system connections, and manage demonstration registers.</p>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px;">
+            
+            <!-- Underwriting Risk Appetite Settings -->
+            <div class="fine-card">
+              <div class="card-title" style="margin-bottom: 14px;">Credit Risk Appetite &amp; Approval Sensitivity</div>
+              <div class="card-subtitle" style="margin-bottom: 18px;">Adjust the policy cutoff threshold to align with quarterly branch lending targets:</div>
+
+              <div style="background:var(--bg-subtle); padding:18px; border-radius:var(--radius-md); margin-bottom:20px; border:1px solid var(--border-light);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span style="font-weight:700; color:var(--text-main);">Decision Approval Threshold: <strong id="threshold-val-setting" style="color:var(--primary-teal);">0.50 (Standard)</strong></span>
+                  <span class="pill-badge approved">&bull; Recommended Default</span>
+                </div>
+                <input type="range" class="form-range" id="input-threshold-slider" min="0.30" max="0.70" step="0.05" value="0.50" style="width:100%; cursor:pointer;">
+                <div style="display:flex; justify-content:space-between; font-size:0.78rem; color:var(--text-muted); margin-top:6px;">
+                  <span>0.30 (Growth Mode - Higher Approval)</span>
+                  <span>0.50 (Standard Retail Policy)</span>
+                  <span>0.70 (Conservative - Low Risk)</span>
+                </div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; gap:12px; font-size:0.9rem;">
+                <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-light); padding-bottom:10px;">
+                  <span style="color:var(--text-secondary);">Active Underwriting Model</span>
+                  <span style="font-weight:700;">Standard Retail Policy (XGBoost Engine)</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-light); padding-bottom:10px;">
+                  <span style="color:var(--text-secondary);">Decision Turnaround Time</span>
+                  <span style="font-weight:700; color:var(--primary-teal);">&lt; 0.1s (Instant Automated Pre-Sanction)</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border-light); padding-bottom:10px;">
+                  <span style="color:var(--text-secondary);">Fair Lending Protocol</span>
+                  <span style="font-weight:700;">ECOA / Non-Discrimination Audited (100% Pass)</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; padding-top:4px;">
+                  <span style="color:var(--text-secondary);">Production Server Status</span>
+                  <span class="pill-badge approved" id="cfg-server-status">&bull; Online &amp; Operational</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Operational & Demo Maintenance Tools -->
+            <div class="fine-card">
+              <div class="card-title" style="margin-bottom: 14px;">Branch Maintenance &amp; Demonstration Tools</div>
+              <div class="card-subtitle" style="margin-bottom: 18px;">Administrative operations for testing and report downloads:</div>
+
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <button class="btn-preset" id="btn-test-connection" style="width: 100%; text-align: center; padding: 12px;">
+                  &circlearrowright; Test Underwriting Service Connection
+                </button>
+                <button class="btn-preset" id="btn-export-csv-settings" style="width: 100%; text-align: center; padding: 12px;">
+                  &DownArrowBar; Export Complete Application Register (CSV)
+                </button>
+                <button class="btn-preset" id="btn-sim-50" style="width: 100%; text-align: center; padding: 12px; background:var(--primary-teal); color:#FFFFFF; border:none; font-weight:700;">
+                  + Simulate 50 Live Applications
+                </button>
+                <button class="btn-preset" id="btn-reset-telemetry" style="width: 100%; text-align: center; padding: 12px; color:var(--accent-red); border-color:#FDEDED; background:#FDEDED;">
+                  &cross; Clear / Reset Demo Applications Register
+                </button>
+                <div id="settings-status-msg" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; text-align: center;"></div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- LOANIQ Controller Script -->
+  <script src="app.js"></script>
+</body>
+</html>

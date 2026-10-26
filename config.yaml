@@ -1,0 +1,74 @@
+# Loan Approval Prediction with ML Telemetry - Configuration
+
+project:
+  name: "loan-telemetry"
+  version: "1.0.0"
+  random_seed: 42
+
+paths:
+  raw_data: "data/raw/train.csv"
+  processed_train: "data/processed/train.csv"
+  processed_test: "data/processed/test.csv"
+  best_model: "models/best_model.joblib"
+  model_meta: "models/model_meta.json"
+  telemetry_db: "logs/telemetry.db"
+  data_quality_report: "reports/data_quality.json"
+  drift_report: "reports/drift_demo.json"
+  fairness_report: "reports/fairness.json"
+  mlflow_tracking_uri: "file:./mlruns"
+
+data:
+  target_column: "Loan_Status"
+  id_column: "Loan_ID"
+  sensitive_attributes:
+    - "Gender"
+    - "Married"
+    - "Property_Area"
+  model_features:
+    numeric:
+      - "ApplicantIncome"
+      - "CoapplicantIncome"
+      - "LoanAmount"
+      - "Loan_Amount_Term"
+      - "Credit_History"
+      - "Total_Income"
+      - "EMI"
+      - "Balance_Income"
+      - "Loan_to_Income"
+      - "Log_Total_Income"
+    categorical:
+      - "Dependents"
+      - "Education"
+      - "Self_Employed"
+      - "Property_Area"
+  test_size: 0.20
+  cv_folds: 5
+
+decision:
+  default_threshold: 0.50
+
+drift:
+  psi_stable_threshold: 0.10
+  psi_moderate_threshold: 0.25
+  ks_p_value_threshold: 0.05
+  num_bins: 10
+
+fairness:
+  gap_threshold: 0.10
+  protected_attributes:
+    - "Gender"
+    - "Married"
+    - "Property_Area"
+
+hyperparameters:
+  random_forest:
+    n_estimators: [50, 100, 200]
+    max_depth: [3, 5, 8, null]
+    min_samples_split: [2, 5, 10]
+    min_samples_leaf: [1, 2, 4]
+  xgboost:
+    n_estimators: [50, 100, 200]
+    max_depth: [3, 4, 6]
+    learning_rate: [0.01, 0.05, 0.1, 0.2]
+    subsample: [0.7, 0.8, 1.0]
+    colsample_bytree: [0.7, 0.8, 1.0]

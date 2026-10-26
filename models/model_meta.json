@@ -1,0 +1,112 @@
+{
+  "model_name": "XGBoost",
+  "version": "1.0.0",
+  "random_seed": 42,
+  "selected_metrics": {
+    "test_accuracy": 0.8618,
+    "test_precision": 0.8469,
+    "test_recall": 0.9765,
+    "test_f1": 0.9071,
+    "test_roc_auc": 0.8359,
+    "cv_f1_mean": 0.8524
+  },
+  "default_threshold": 0.5,
+  "features": {
+    "numeric": [
+      "ApplicantIncome",
+      "CoapplicantIncome",
+      "LoanAmount",
+      "Loan_Amount_Term",
+      "Credit_History",
+      "Total_Income",
+      "EMI",
+      "Balance_Income",
+      "Loan_to_Income",
+      "Log_Total_Income"
+    ],
+    "categorical": [
+      "Dependents",
+      "Education",
+      "Self_Employed",
+      "Property_Area"
+    ],
+    "sensitive_excluded": [
+      "Gender",
+      "Married"
+    ]
+  },
+  "training_data_statistics": {
+    "ApplicantIncome": {
+      "mean": 5529.998,
+      "std": 6457.784,
+      "median": 3859.0,
+      "q25": 2906.0,
+      "q75": 5825.0
+    },
+    "CoapplicantIncome": {
+      "mean": 1569.537,
+      "std": 2789.523,
+      "median": 1032.0,
+      "q25": 0.0,
+      "q75": 2241.0
+    },
+    "LoanAmount": {
+      "mean": 147.31,
+      "std": 87.097,
+      "median": 128.0,
+      "q25": 100.0,
+      "q75": 168.0
+    },
+    "Loan_Amount_Term": {
+      "mean": 341.286,
+      "std": 65.855,
+      "median": 360.0,
+      "q25": 360.0,
+      "q75": 360.0
+    },
+    "Credit_History": {
+      "mean": 0.85,
+      "std": 0.357,
+      "median": 1.0,
+      "q25": 1.0,
+      "q75": 1.0
+    },
+    "Total_Income": {
+      "mean": 7099.535,
+      "std": 6692.758,
+      "median": 5391.0,
+      "q25": 4177.0,
+      "q75": 7550.5
+    },
+    "EMI": {
+      "mean": 0.493,
+      "std": 0.575,
+      "median": 0.367,
+      "q25": 0.286,
+      "q75": 0.515
+    },
+    "Balance_Income": {
+      "mean": 6665.423,
+      "std": 6662.008,
+      "median": 4950.333,
+      "q25": 3788.667,
+      "q75": 7091.944
+    },
+    "Loan_to_Income": {
+      "mean": 23.53,
+      "std": 7.774,
+      "median": 24.024,
+      "q25": 19.243,
+      "q75": 27.893
+    },
+    "Log_Total_Income": {
+      "mean": 8.678,
+      "std": 0.543,
+      "median": 8.593,
+      "q25": 8.338,
+      "q75": 8.93
+    }
+  },
+  "train_rows": 491,
+  "test_rows": 123
+}

@@ -1,0 +1,29 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache & compiler files
+__pycache__/
+*.py[cod]
+*$py.class
+*.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+
+# MLflow local runs cache
+mlruns/
+.mlflow/
+
+# Logs (keep directory structure via .gitkeep)
+logs/*.db
+logs/*.log
+!logs/.gitkeep
+
+# OS & Editor files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.tmp
